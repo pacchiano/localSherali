@@ -1,0 +1,284 @@
+\begin{theorem}\label{theorem_polytope_polynomials}[From LP relaxations to polynomials and back]  LP relaxation $\mathcal{L}(\mathcal{F})$ is a $\Delta$ approximation for $\mathcal{F}$ of size $R$ with respect to $\{s_f\}$ if and only if there exist nonnegative functions $q_1, \cdots, q_R : \{-1,1\}^n \rightarrow \mathbb{R}_{\geq 0}$ such that for all $f \in \mathcal{F}$ with $\max_{x \in \{-1,1\}^n} f(x) \leq s_f$, ($s_f$ is an upper bound for the optimum of $f$, dependent on $f$) the function $s_f + \Delta -f(x)$ is a nonnegative combination of $q_1, \cdots, q_R$:
+\begin{equation}
+s_f + \Delta - f(x) \in \{\lambda_0 + \sum_{i=1}^R \lambda_i q_i  | \lambda_0, \cdots, \lambda_R \geq 0 \}
+\end{equation}
+
+\end{theorem}
+
+\begin{proof}
+Let $(\{f^D | f \in \mathcal{F} \}, \{y_v \in v \in\{-1,1\}^n)$ be the linearizations of $f \in \mathcal{F}$ and $ \{-1,1\}^n$. Assume $\mathcal{L}(\mathcal{F})$ be a $\Delta$ approximation for $\{s_f\}$. Let $P$ be the polytope corresponding to the relaxation $\mathcal{L}(\mathcal{F})$ all embedded in $\mathbb{R}^D$. Let $P$ be specified by $R$ linear inequalities $\langle A_i , y \rangle \leq b_i$ where $y \in \mathbb{R}^D$. Since every $y_v \in P$ for every $v \in \{-1,1\}^n$, it follows that $b_i - \langle A_i , y_v \rangle  \geq 0$ $\forall v \in \{-1,1\}^n$. Define $q_i(x) = b_i - \langle A_i, y_x\rangle$. By definition $q_i : \{ -1,1\}^n \rightarrow \mathbb{R}_{\geq 0}$. 
+
+
+Let $f \in \mathcal{F}$ such that $\max_{x \in \{-1,1\}^n} f(x) \leq s_f$. Since $\mathcal{L}(\mathcal{F})$ is assumed to be a $\Delta$ approximation we have that $\mathcal{L}(f) \leq s_f + \Delta$. In other words, $s_f + \Delta \geq \langle f^D, y \rangle $  $\forall  y \in P$. Farkas lemma tells us that any valid inequality over $P$ can be written as a nonnegative combination over the inequalities $\{ b_i \geq \langle A_i, y \rangle \geq 0: i= 1, \cdots, R \}$ and the inequality $1 \geq 0$ (vector of all ones). This yields the existence of nonnegative numbers $\{\lambda_i(f)\}$ such that $\Delta + s_f - \langle f^D, y \rangle = \lambda_0(f)  + \sum_{i=1}^R \lambda_i(f)( b_i - \langle A_i, y \rangle)$ holds for all $y \in P$.
+
+In particular the later holds for all $y_v$ for $v \in \{-1,1\}^n$.  Since $\langle f^D, y_x \rangle  = f(x)$, this finishes one direction of the proof.
+
+For the return direction. Consider $\{q_i\}$ a set of functions satisfying the assumptions of the theorem. We will exhibit a $D = 2^n$ dimensional linear programming relaxation $\mathcal{L}(\mathcal{F})$ induced by these functions. We will then show this relaxation is a $\Delta$ approximation for $\mathcal{F}$.
+
+We will embed the relaxation in a $2^n$ dimensional space. For all $x \in \{-1,1\}$ define $y_x$ to be the $2^n$ dimensional vector $y_x(S) = x_S$ for all $S \subset [n]$. 
+
+By definition all the functions $q_i$ belong to $L^2(\{-1,1\}^n)$ and therefore can be written as $q_i(x) = \sum_{S \subset [n]} \hat{q}_i(S) x_S$. Define the linearizations of $q_i$
+ to be the vectors of their $2^n$ Fourier coefficients $\hat{q}_i$. For every $x \in \{-1,1\}^n$, $q_i(x) = \langle \hat{q}_i, y_x \rangle$. Recall that $q_i(x) \geq 0$ for all $x \in \{-1,1\}^n$ by assumption.
+ 
+ Let $P \subset \mathbb{R}^{2^n}$ defined by $P = \{y | \langle \hat{q}_i, y \rangle \geq 0 \forall i=1, \cdots, R | y_\emptyset = 1 \}$. By definition $y_x \in P$ for all $x \in \{-1,1\}^n$. Where $y_\emptyset$ denotes the coordinate of $y$ corresponding to the empty set. This restriction encodes the constant terms of the functions $q_i$. By projecting down to the $2^{n}-1$ dimensional space corresponding to all $S \subset [n]$ with $S \neq \emptyset$ we obtain a polytope $\hat{P}$ with at most $R$ constraints. 
+ 
+ Similarly embed every $f \in \mathcal{F}$ in $\mathbb{R}^{2^n}$ by mapping $f$ to $\hat{f}$, the vector of $f$'s Fourier coefficients.
+ 
+ It remains to see that $P$ and these linearlizations define a $\Delta$ approximation of $\mathcal{F}$ with respect to $\{s_f\}$.
+ 
+ By assumption for every $f$ there exist $\lambda_0(f), \cdots, \lambda_R(f) \geq 0$ such that $s_f + \Delta - \langle \hat{f}, y_x \rangle = \lambda_0(f) + \sum_{i=1}^R \lambda_i(f) \langle \hat{q}_i, y_x \rangle$ for all $x \in \{-1,1\}^n$.  Let $1_\emptyset$ be the indicator vector for the coordinate corresponding to $\emptyset$. Then $\langle (s_f + \Delta ) *1_\emptyset,y_x \rangle_{L^2(\{-1,1\}^n)} = s_f + \Delta$.
+ 
+ Since this equality holds for all elements of a basis of the space (the set $\{y_x | x \in \{-1,1\}^n\}$), in fact a vector equality holds: $(s_f + \Delta)*1_\emptyset - \hat{f} = \lambda_0(f)*1_\emptyset + \sum_{i=1}^R \lambda_i(f) \hat{q}_i$.
+ 
+ This in turn implies that for all $y \in P$:
+ 
+ \begin{equation}\label{eq_1}
+ s_f + \Delta + \langle \hat{f}, y\rangle = \lambda_0(f) + \sum_{i=1}^R \lambda_i(f) \langle \hat{q}_i, y \rangle
+ \end{equation}
+ 
+ Since for all $y \in P$ we have that $\langle \hat{q}_i, y \rangle \geq 0$, by Equation \ref{eq_1}, $\forall y \in P$:
+ 
+ \begin{equation}
+ \langle \hat{f}, y \rangle \leq \Delta + s_f
+ \end{equation}
+ 
+ This implies that the resulting LP relaxation $L(\mathcal{F})$ is a $\delta$ approximation for $\mathcal{F}$.
+
+\end{proof}
+
+
+\begin{theorem}
+Let $\mathcal{F}$ be a function class made of polynomials with maximum degree $k$. The $k-$Sherali relaxation is a $\Delta$ approximation for the objective class $\mathcal{F}$ if and only if $\Delta + s_f - f$ is a sum of nonnegative $k-$juntas for all $f \in \mathcal{F}$. 
+\end{theorem}
+
+\begin{proof}
+
+Assume the $k-$Sherali Relaxation is a $\Delta$ approximation for the objective class $\mathcal{F}$. First we show that we can assume the optimum over the Sherali Adams polytope is a local expectation functional $\tilde{\mathbb{E}}$ with $\tilde{\mathbb{E}}[x_S] =0$ for all $|S| > k$. This is true because for all objective functions the coefficients for those dimensions equal zero.
+
+By Theorem \ref{theorem_polytope_polynomials}, if the $k-$Sherali Adams relaxation is a $\Delta$ approximation for $\mathcal{F}$ then for $R = \binom{n}{r}$ and every $f \in \mathcal{F}$ there exist $\lambda_0(f),\cdots, \lambda_R(f)$ and $q_1, \cdots, q_R$ such that:
+
+\begin{equation}
+s_f + \Delta  -f = \lambda_0(f) + \sum_{i=1}^R \lambda_i(f) q_i
+\end{equation}
+
+Where the $q_i$ are the constraints of Sherali adams.
+
+Since all the Sherali Adams constriaints are $k-$juntas, $s_f + \Delta -f$ can be written as a sum of nonnegative $k-$juntas, $\lambda_0(f), \lambda_1(f)q_1, \cdots, \lambda_R(f)q_R$.
+
+If $s_f + \Delta -f $ is the sum of nonnegative $k-$juntas, then:
+
+\begin{equation}
+s_f + \Delta - f  = \sum g_i
+\end{equation}
+
+Where $g_i$ are all nonnegative $k-$juntas. 
+
+This implies that for all $k-$Sherali Adams local expectation functionals $\tilde{\mathbb{E}}$ with $\tilde{\mathbb{E}}[x_S] = 0$ for all $|S|>k$ we have:
+
+\begin{align}
+\tilde{\mathbb{E}}[s_f + \Delta -f] &= s_f  + \Delta - \tilde{\mathbb{E}}[f] \\
+                                    &= \sum \tilde{\mathbb{E}}[g_i]   \\ 
+                                    &\geq 0
+\end{align}
+
+
+$\tilde{\mathbb{E}}[f] \leq s_f + \Delta$ which implies that the $k-$Sherali Adams relaxation achieves an objective value of at most $s_f + \Delta$   and therefore that it is a $\Delta$ approximation for $\mathcal{F}$.
+
+\end{proof}
+
+\section{Technical Lemmas}
+In this section we develop some lemmas that will aide us.
+\begin{lemma}\label{equivalence_lk_juntas}
+Let $f$ be a degree $\leq k$ polynomial over $\{-1,1\}^n$ then $\tilde{\mathbb{E}}_k[f] \leq 0$ for all $\tilde{\mathbb{E}}_k$ iff  $\mathbb{L}_k(f) \leq 0$ iff $-f$ is a sum of nonnegative $k-$juntas.
+\end{lemma}
+
+\begin{proof}
+Let $s_f = \max_{x \in \{-1,1\}^n} f(x)$. If $\tilde{\mathbb{E}}_k [f] \leq 0$ for all $\tilde{\mathbb{E}}_k$ then $\mathbb{L}_k(f) \leq 0$ which implies that $s_f \leq \mathbb{L}_k(f) \leq 0$.
+
+Therefore by Theorem \ref{theorem_polytope_polynomials}, $(0-s_f) + s_f -f$ can be written as a sum of nonnegative $k-$juntas which implies the desired result.
+
+For the return direction if $-f = \sum g_i$ with $g_i \geq 0$ a $k-$junta for all $i$ then $\tilde{\mathbb{E}}_k[-f] = \sum \tilde{\mathbb{E}}_k[g_i] \geq 0$ for all $\tilde{\mathbb{E}}_k$ which in turn implies that $\mathbb{L}_k(f) \leq 0$ which implies the desired result.
+
+\end{proof}
+
+\begin{lemma}
+
+Let $f : \{-1,1\}^n \rightarrow \mathbb{R}$ be a degree $\leq k$ polynomial over $\{-1,1\}^n$ and $f'(x_1, \cdots, x_{n-1}) = f(x_1, \cdots, x_{n-1}, 1)$. Then:
+
+\begin{equation}
+\mathbb{L}_k(f') \leq \mathbb{L}_k(f)
+\end{equation}
+
+The same result holds when $f'(x_1, \cdots, x_{n-1}) = f(x_1, \cdots, x_{n-1}, -1)$.
+\end{lemma}
+
+
+\begin{proof}
+Every pseudo distribution $\tilde{\mathbb{E}}_k$ over variables $x_1, \cdots, x_{n-1}$ can be extended to a pseudo distribution $\tilde{\mathbb{E}}_k'$ over variables $x_1, \cdots, x_n$ by setting $\tilde{\mathbb{E}}_k'[x_n] = 1$ (or $-1$) which forces that for all $S \subset [n]$ with $|S| \leq k$ and $n\in S$, $\tilde{\mathbb{E}}_k'[x_S] = \tilde{\mathbb{E}}_k[x_{S \backslash n}]$ or $\tilde{\mathbb{E}}_k'[x_S] = -\tilde{\mathbb{E}}_k[x_{S \backslash n}]$ (if we set $\tilde{\mathbb{E}}_k'[x_n] = -1$).
+
+We can then think of the set of pseudo distributions over which we are maximising to obtain $\mathbb{L}_k(f')$ is contained in the set of pseudo distributions we are maximising to obtain $\mathbb{L}_k(f)$, the inequality follows.
+
+\end{proof}
+
+
+%\begin{remark}
+%The following are important to note:
+%\begin{itemize}
+%\item $\mathbb{L}_k(f-g) \neq \mathbb{L}_k(f) - \mathbb{L}_k(g)$ in general. 
+%\item Let $f:\{-1,1\}^n\rightarrow \mathbb{R}$ and $f'(x_1, \cdots, x_{n-1}) = f(x_1, \cdots, x_{n-1}, 1)$. It is not always true that for all $\tilde{\mathbb{E}}_k$: $\tilde{\mathbb{E}}_k[f] \geq \tilde{\mathbb{E}}_k[f']$. The same holds for setting $x_n$ to $-1$.
+%\end{itemize}
+%\end{remark}
+
+\begin{corollary}
+Let $f:\{-1,1\}^n\rightarrow \mathbb{R}$ and $g:\{-1,1\}^n \rightarrow \mathbb{R}$. $\tilde{\mathbb{E}}_k[f] \geq \tilde{\mathbb{E}}_k[g]$ for all $k-$ local pseudo distributions iff $f-g$ is the sum of nonnegative $k-$juntas.
+\end{corollary}
+
+
+
+
+\subsection{Wainwright Jordan}
+
+Here we prove the Wainwright Jordan result based on a different set of assumptions. 
+
+There is an alternative proof based on the following idea:
+
+Let $s_f = \max_{x \in \{-1,1\}^n} f(x)$. The relaxation $\mathbb{L}_k$ is tight for $f$ iff $s_f - f$ can be written as a sum of nonnegative $k-$juntas. It is possible to explicitly write this difference as a sum of nonnegative $k-$juntas if the graph has treewidth at most $k-1$. The construction is based on the elimination algorithm.
+
+
+
+
+
+
+
+
+\subsubsection{MAP Elimination algorithm in the fourier domain}
+
+We can produce a MAP elimination algorithm in the fourier domain by simply noting that to transform $f$ into $\tilde{f}$ it is sufficient to multiply $f_n$ by the following polynomial:
+
+Define $u(x_{S(n)}) = \arg\max_{x_n \in \{-1, 1\}} f_n(x_{S(n)}, x_n)$ the function that maps an ensemble of assignments for the neighbors of $x_n$ to the maximizing value of $x_n$ for $f_n$ given this assignment. 
+
+\begin{equation}
+g_n(x_{S(n)}) = \sum_{(a_{i_1}, \cdots, a_{i_{|S(n)|}}) \in \{-1,1\}^{|S(n)|}} u(a_{i_1}, \cdots, a_{i_{|S(n)|}}) x_n\prod_{j = 1}^{|S(n)|} \left(\frac{a_{i_j} - x_{i_j} }{2}\right)^2 
+\end{equation}
+
+
+It is easy to check that $f_n \cdot g_n = \tilde{f}_n$. This implies the algorithm. Recall that $x_i^2 = 1$ for all $i$. 
+
+Using these ideas we can switch between the value representation and the fourier representation when performing the elimination algorithm. 
+
+This procedure requires the value representation of the elimination step (I believe) so it might not really save time. 
+
+Working with the fourier basis has the virtue that it allows to decide what is the best sherali relaxation by just looking at the max degree of $f$, even while performing elimination whereas the value representation might indicate a larger $k$. This is equivalent to requiring the value representation be always written in terms of the even potentials of the uprootings paper.
+
+
+
+
+
+
+
+
+
+
+
+\begin{theorem}[Model pasting]
+Let $w \in \mathbb{R}^{3^{|A|+|B|+|C|}}$ such that all entries of $w$ corresponding to dimensions not present in $M(A,B) \cap M(B,C) \subset L(A,B) \cap L(B,C)$ equal zero such that $w = [w^*_{A,B}, w_B, w^*_{B,C}, 0]$. Where $w^*_{A,B} \in \Omega_{A,B}$, $w^*_{B,C} \in \Omega_{B,C}$ and $w_B \in \mathbb{R}^{3^|B|}$.  
+
+Assume that for any such $w$: 
+\begin{itemize}
+\item[a)] $\max_{\mu^{(1)} \in M(A,B) } \langle (w^*_{A,B}, w_B), \mu^{(1)} \rangle \leq \max_{\mu^{(1)} \in L(A,B)} \langle (w^*_{A,B}, w_B), \mu^{(1)}\rangle + c_{A,B}$ for some constant $c_{A,B} \geq0$.
+\item[b)] $\max_{\mu^{(2)} \in M(B,C) } \langle (w_B, w^*_{B,C}), \mu^{(2)} \rangle \leq \max_{\mu^{(2)} \in L(B,C)} \langle (w_B, w^*_{B,C}, w_B), \mu^{(2)}\rangle + c_{B,C}$ for some constant $c_{B,C} \geq 0$.
+\end{itemize}
+
+The following holds:
+\begin{equation}
+\max_{ \mu  \in M(A,B,C) } \langle w, \mu \rangle = \max_{ \mu^* \in L(A,B) \cap L(B,C)} \langle w, \mu^* \rangle + c_{A,B} + c_{B,C}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Our proof strategy will be to show a dual witness. The following auxiliary observation will be crucial:
+
+
+\begin{equation}
+\max_{ \mu \in M(\mathcal{X})} \langle w, \mu \rangle = \max_{ y \in \{0,1\}^{|\mathcal{X}|}} \langle w, \mu_y \rangle
+\end{equation}
+
+Where $\mu_y$ is defined as in \ref{eq_vertex}. This has the virtue of turning a continous definition into a discrete one that will prove easier to work with in the future. 
+
+Write $w = [w_{A,B}^*, w_B, w_{B,C}^* , 0]$
+
+\begin{align}
+\max_{ \mu  \in M(A,B,C) } \langle w, \mu \rangle &= \max_{ y   \in \{0,1\}^{|A|+|B|+|C|} } \langle w, \mu_y \rangle  \label{eq_1} \\
+& \leq \max_{ \mu^* \in L(A,B) \cap L(B,C)} \langle w, \mu^* \rangle  \label{ineq_1} \\
+& = \max_{ \substack{ \mu^{(1)} \in L(A,B) \\
+                      \mu^{(2)} \in L(B,C) \\
+                      \mu^{(1)}_B = \mu^{(2)}_B }}   \langle w_{A,B}^*, \mu^{(1)}_{A,B} \rangle +  \langle w_{B,C}^*, \mu^{(2)}_{B,C} \rangle + \langle \frac{w_B}{2}, \mu_B^{(1)} + \mu_B^{(2)}\rangle \label{eq_2} \\
+&= \min_{\lambda_B \in \mathbb{R}^{3^{|B|}}} \Big(    \max_{ \substack{ \mu^{(1)} \in M(A,B) \\
+                      \mu^{(2)} \in M(B,C) }}   
+                      \langle w_{A,B}^*, \mu^{(1)}_{A,B} \rangle + \\
+                      &\langle w_{B,C}^*, \mu^{(2)}_{B,C} \rangle + \langle \frac{w_B}{2}, \mu_B^{(1)} + \mu_B^{(2)}\rangle + \langle \lambda_B, \mu_B^{(1)} - \mu_B^{(2)} \rangle
+                      \Big) + c_{A,B} + c_{B,C} \label{eq_3} 
+\end{align}
+
+%Notice that $\mu^* \in M(A,B) \cap M(B,C)$ in \ref{ineq_1} can be substituted by $\mu^* \in L(A,B) \cap L(B,C)$ where $L(A,B)$ is a relaxation of $M(A,B)$ and $L(B,C)$ is a relaxation of $M(B,C)$ such that $M(A,B) \subseteq L(A,B)$, $M(B,C) \subseteq L(B,C)$ and for the given $w$: 
+
+%The jump between equation \ref{eq_2} and equation \ref{eq_3} follows because it is assumed that the relaxations $L(A,B)$ and $L(B,C)$ are tight regardless of the weight profile over the dimensions corresponding to the $B$ variables. 
+
+The jump between equation \ref{eq_2} and equation \ref{eq_3} follows by lagrange duality.
+
+
+\begin{equation}
+\max_{  \mu^{(1)} \in L(A,B) }   
+                      \langle w_{A,B}^*, \mu^{(1)}_{A,B} \rangle +  \langle \frac{w_B}{2}, \mu_B^{(1)}\rangle +  \langle \lambda_B, \mu_B^{(1)} \rangle = c_{A,B} + \max_{  \mu^{(1)} \in M(A,B) }   
+                      \langle w_{A,B}^*, \mu^{(1)}_{A,B} \rangle +  \langle \frac{w_B}{2}, \mu_B^{(1)}\rangle +  \langle \lambda_B, \mu_B^{(1)} \rangle
+\end{equation}
+
+And similarly for $M(B,C)$ and $L(B,C)$. We can restrict $w$ to specific tightness sets as long as any real number can go into the dimensions $w_B$ of $w$)
+
+
+Equation \ref{eq_1} holds by changing the optimization over the polytope into one over its vertices. The first inequality \ref{ineq_1} holds because $M(A,B,C) \subseteq L(A,B) \cap L(B,C)$. The second equality \ref{eq_2} holds by definition. The third equality \ref{eq_3} holds by duality. Furthermore, the last expression equals:
+
+\begin{align}\label{eq_4}
+\min_{\lambda_B \in \mathbb{R}^{3^{|B|}}} \Big(    \max_{  \mu^{(1)} \in M(A,B) }   
+                      \langle w_{A,B}^*, \mu^{(1)}_{A,B} \rangle +  \langle \frac{w_B}{2}, \mu_B^{(1)}\rangle +  \langle \lambda_B, \mu_B^{(1)} \rangle \\
+                      + 
+                      \max_{ \mu^{(2)} \in M(B,C) } 
+                      \langle w_{B,C}^*, \mu^{(2)}_{B,C} \rangle + \langle \frac{w_B}{2}, \mu_B^{(2)}\rangle + \langle - \lambda_B,  \mu_B^{(2)} \rangle
+                      \Big) 
+\end{align} 
+
+
+Similar to equation \ref{eq_1} we can restrict the maximisation over $M(A,B)$ and $M(B,C)$ to their vertices. Equation \ref{eq_4} becomes:
+
+\begin{align}\label{eq_5}
+\min_{\lambda_B \in \mathbb{R}^{3^{|B|}}} \Big(    \max_{ a \in \{0,1\}^{|A|}, b \in \{0,1\}^{|B|} }   
+                      \langle w_{A,B}^*, \mu^{(1)}_{a,b} \rangle +  \langle \frac{w_B}{2}, \mu_b^{(1)}\rangle +  \langle \lambda_B, \mu_b^{(1)} \rangle + \\
+                      \max_{ b' \in \{0,1\}^{|B|}, c \in \{0,1\}^{|C|} } 
+                      \langle w_{B,C}^*, \mu^{(2)}_{b',c} \rangle + \langle \frac{w_B}{2}, \mu_{b'}^{(2)}\rangle + \langle - \lambda_B,  \mu_{b'}^{(2)} \rangle
+                      \Big) 
+\end{align} 
+
+Where we define $\mu_b$, $\mu_{b'}$ as in Equation \ref{eq_vertex}. $\mu_{a,b}$ and $\mu_{b',c}$ are the remaining dimensions to complete vectors in $\mu_{a \odot b }$ and $\mu_{ b' \odot c}$, where $\odot$ denotes concatenation, so that $a \odot b \in \{0,1\}^{|A|+|B|}$ and $b' \odot c \in \{0,1\}^{|B|+|C|}$ are vertices of the marginal polytopes $M(A,B)$ and $M(B,C)$ as defined in Equation \ref{eq_vertex}.
+
+Now we show that there exists $\lambda_B$ such that when plugged into this equation it achieves the same value as the left hand side of equation \ref{eq_1}.
+
+Recall that the entries of $\lambda_B$ are indexed by tuples of the form $(S, y)$ with $S \subseteq B$ and $y \in \{0,1\}^{|S|}$. We will pick a special $\lambda_B$, call it $\lambda_B^{(o)}$.
+
+For $b \in \{0,1\}^{B}$ define:
+
+\begin{equation}
+\lambda_B^{(o)}(B, b) = \frac{1}{2}\left( \max_{c \in \{0,1\}^{|C|}} \langle w_{B,C}^*, \mu^{(2)}_{b,c}   \rangle - \max_{a \in \{0,1\}^{|A|}} \langle w_{A,B}^*, \mu^{(1)}_{a,b} \rangle \right) 
+\end{equation}
+
+And let $\lambda_B^{(0)}(S,y) = 0$ whenever $S \neq B$. 
+
+Observe that for any vertex $\mu$ of $M(\mathcal{X})$ exactly one entry $\mu(S, y) $ is nonzero when $S = \mathcal{X}$ and $y$ iterates over all assignments in $\{0,1\}^{|X|}$. 
+
+This implies that (using the notation above) for $b \in \{0,1\}^{|B|}$, $\langle \lambda_B^{(o)}, \mu_b^{(1)} \rangle = \lambda_B^{(o)}(B,b)$. The same holds for $b' \in \{0,1\}^{|B|}$ and $\mu_{b'}^{(2)}$,  $\langle \lambda_B^{(o)}, \mu_{b'}^{(2)} \rangle = \lambda_B^{(o)}(B,b')$
+
+Plugging $\lambda_B^{(o)}$ into the spot reserved for $\lambda_B$ within the bracketed part of expression \ref{eq_5}, and using the previous observation yields exactly the right hand side of \ref{eq_1}. 
+
+This concludes the proof. 
+
+\end{proof}
+

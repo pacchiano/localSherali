@@ -1,0 +1,1 @@
+fme ./extension_edge_files/quad_edge_6.txt -o ./extension_edge_files/quad_edge_6_reduced.txt -p -s "z2z3 z0z5 z2z4 z3z4 u z5 z3z5 z0z3 z4z5 z2z6 z1z4 z1z2 z6 z4 z2z5 z0 z5z6 z4z6 z1z6 z0z6 z1 z3z6 z0z2 z1z3 z2 z0z4 z3 z1z5" -v

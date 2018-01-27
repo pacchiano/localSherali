@@ -1,0 +1,62 @@
+\subsubsection{Clamping}
+
+\begin{lemma}
+Let $\mathcal{F}$ be a family of objective functions over $x_1, \cdots, x_n$ such that the $k-$th Sherali Adams has a $\Delta$ approximation error. Let $x_{n,f}^* \in\{-1,1\}$ be the optimal assignment of $x_n$ for $f$ in a MAP solution. The family $F^{(1)} = \{g(x_1, \cdots, x_{n-1}) = f(x_1, \cdots, x_{n-1},  x_{n,f}^*) \} $ has a $\Delta$ approximation error as well by $\mathbb{L}_k$. 
+\end{lemma}
+
+\begin{proof}
+Apply the characterization of $\Delta$ approximated families as a sum of nonnegative $k-$juntas.Setting a variable to a particular value yields a representation of the remaining function as a sum of nonnegative juntas as well. Since the MAP assignment for $f'$ achieves the same score as that of $f$ the upper bound $s_f$ is still valid for $f'$. In particular if $s_f$ equals the MAP value of $f$, this implies the approximation error is preserved. The statement might not hold if we set $x_n$ to $-x_{n,f}^*$ because in this case the MAP value of $f'$ might not equal that of $f$ and therefore the approximation error might increase by an amount equal to the degradation in the MAP value of $f$ vs that of $f'$. 
+\end{proof}
+
+The lemma above proves that clamping variable $x_n$ to its MAP value preserves the approximation error.
+
+Now we provide sufficient conditions under which we can prove that $x_n^* = 1$ [The MAP value of $x_n$ equals $1$].
+
+Let $f:\{-1,1\}^n\rightarrow \mathbb{R}$ and $f'(x_1, \cdots, x_{n-1}) = f(x_1, \cdots, x_{n-1},1)$. 
+\begin{lemma}
+If $f'-f$ is a sum of nonnegative juntas (possibly a single size $n$ junta) then there exists a MAP solution with $x_n^* = 1$.
+\end{lemma}
+
+\begin{proof}
+Assume the contrary, $\max_{x \in \{-1,1\}^n} f(x) > \max_{x\in \{-1,1\}^n, x_n = 1} f(x)$. Let $x_{MAP}^*$ be a MAP assignment of $f$. Then $f(x_{MAP}^*) > f'(x_{MAP}^*)$ which contradicts the assumption that $f'-f$ is a sum of nonnegative juntas.
+\end{proof}
+
+We can turn this lemma into an equivalent statement with an algorithmic flavor:
+
+\begin{lemma}\label{lemma:clamping_main}
+If $\mathbb{L}_k(f-f')\leq 0$ then there exists a MAP solution with $x_n^* =1$
+\end{lemma}
+
+\begin{proof}
+By Lemma \ref{equivalence_lk_juntas}, $f'-f$ is a sum of nonnegative $k-$juntas iff $\mathbb{L}_k(f-f')\leq 0$. The result follows.
+\end{proof}
+
+\begin{algorithm}[t] \label{a:clamping}
+\caption{Clamping}
+\SetKwInOut{Input}{Input}
+    \SetKwInOut{Output}{Output}
+        \Input{Objective function $f:\{-1,1\}^n \rightarrow \mathbb{R}$, target variable $x_i$, objective value $o \in \{-1,1\}$, Sherali Adams level $k$.}
+	Set $f'(x_1, \cdots, x_{i-1}, x_{i+1},\cdots, x_n) = f(x_1, \cdots, x_i = o, \cdots, x_n)$.
+   Compute $\mathbb{L}_k(f-f')$. 
+   
+   \If { $\mathbb{L}_k(f-f') \leq 0$ }
+   {
+   	Clamp $x_i$ to value $o$. 
+   }
+   \Else
+   {
+   	No clamping is guaranteed. 
+  } 
+\end{algorithm} 
+
+Equivalently, Lemma \ref{lemma:claming_main} states that in case $f'-f$ is tight for $\mathbb{L}_k$, there is a MAP assignment for $f$ with optimal value $o$ for variable $x_i$. Typically for the case of degree two objectives $f'-f$ will be a star graph and $\mathbb{L}_k$ will be tight for $k \geq 2$. This is intimately related to dual decomposition approaches to inference [Cite a bunch of stuff].
+
+%Open: Assume that the optimal pseudo distribution $\tilde{\mathbb{E}}_k[f]$ has $\tilde{\mathbb{E}}_k[x_n] = 1$. Under what conditions can we conclude that $x_n^* = 1$? 
+
+
+
+
+
+
+
+

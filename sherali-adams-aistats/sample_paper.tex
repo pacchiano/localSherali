@@ -1,0 +1,241 @@
+\documentclass[twoside]{article}
+\usepackage{aistats2018}
+ % If your paper is accepted, change the options for the package
+% aistats2018 as follows:
+%
+%\usepackage[accepted]{aistats2018}
+%
+% This option will print headings for the title of your paper and
+% headings for the authors names, plus a copyright note at the end of
+% the first column of the first page.
+
+
+\usepackage{amsmath}		% contains equation environment
+\usepackage{amsfonts}		% contains mathbb command
+\usepackage{amssymb}
+\usepackage{bm}				% contains bm command (better than boldsymbol)
+\usepackage{bbm}            %indicators
+\usepackage{enumerate}		%change list numbering formats
+\usepackage{mathtools}		% contains dcases environment
+\usepackage{verbatim}		%comments
+
+
+\usepackage[utf8]{inputenc}
+
+
+% definitions, theorems, etc
+\usepackage{amsthm}
+
+
+
+\usepackage[noend]{algpseudocode}
+\usepackage[linesnumbered,ruled]{algorithm2e}
+
+
+
+
+
+\newtheoremstyle{slplain}% name
+{.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space above
+{.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space below
+{\slshape}% Body font
+{}%Indent amount (empty = no indent, \parindent = para indent)
+{\bfseries}%  Thm head font
+{.}%       Punctuation after thm head
+{ }%      Space after thm head: " " = normal interword space;
+%       \newline = linebreak
+{}%       Thm head spec
+
+
+\theoremstyle{slplain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{notation}{Notation}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{algo}[theorem]{Algorithm}
+
+%my macros
+\setcounter{MaxMatrixCols}{15}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\newcommand{\chol}{\operatorname{chol}}	% Cholesky decomposition
+
+\newcommand{\intl}[2]{\ensuremath\int\limits_{#1}^{#2} \! }
+\newcommand{\IB}{\mathbb{B}}
+\newcommand{\IN}{\mathbb{N}}
+\newcommand{\IQ}{\mathbb{Q}}
+\newcommand{\IR}{\mathbb{R}}
+\newcommand{\IZ}{\mathbb{Z}}
+\newcommand{\hs}{\hspace{5mm}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\bs}{\boldsymbol}
+
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\bigland}{\bigwedge}
+\newcommand{\biglor}{\bigvee}
+
+\newcommand{\mA}{\mathcal{A}}
+\newcommand{\mB}{\mathcal{B}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mD}{\mathcal{D}}
+\newcommand{\mE}{\mathcal{E}}
+\newcommand{\mF}{\mathcal{F}}
+\newcommand{\mG}{\mathcal{G}}
+\newcommand{\mH}{\mathcal{H}}
+\newcommand{\mI}{\mathcal{I}}
+\newcommand{\mL}{\mathcal{L}}
+\newcommand{\mM}{\mathcal{M}}
+\newcommand{\mO}{\mathcal{O}}
+\newcommand{\mP}{\mathcal{P}}
+\newcommand{\mR}{\mathcal{R}}
+\newcommand{\mS}{\mathcal{S}}
+\newcommand{\mT}{\mathcal{T}}
+\newcommand{\mU}{\mathcal{U}}
+\newcommand{\mX}{\mathcal{X}}
+\newcommand{\mY}{\mathcal{Y}}
+
+%probability macros
+\newcommand{\var}{\operatorname{var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\newcommand{\Bin}{\operatorname{Bin}}
+\newcommand{\Poisson}{\operatorname{Poisson}}
+
+% macros from UAI writeup
+\def\Reals{\mathbb{R}}					% notation for real numbers
+\def\bphi{\bm{\phi}}					% boldface phi for vectors
+\newcommand{\bPhi}{\mathbf{\Phi}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calX}{\mathcal{X}}
+\def\btheta{\bm{\theta}}				% boldface theta for vectors
+\newcommand{\mN}{\mathcal{N}} 			% normal distribution
+\newcommand{\IE}{\mathbb{E}}  			% expectation sign
+\newcommand{\II}{\mathbb{I}}  			% indicator sign
+\newcommand{\IP}{\mathbb{P}}  			% probability sign
+\newcommand{\IV}{\mathbb{V}}  			% variance sign
+\newcommand{\Exp}{\operatorname{Exp}}	% exponential distribution
+
+\newcommand{\rms}[1]{\mathrm{#1}}
+\newcommand{\bfs}[1]{\mathbf{#1}}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+% \usepackage[final]{nips_2017}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+
+
+
+
+
+
+
+\begin{document}
+
+% If your paper is accepted and the title of your paper is very long,
+% the style will print as headings an error message. Use the following
+% command to supply a shorter title of your paper so that it can be
+% used as headings.
+%
+%\runningtitle{I use this title instead because the last one was very long}
+
+% If your paper is accepted and the number of authors is large, the
+% style will print as headings an error message. Use the following
+% command to supply a shorter version of the authors names so that
+% they can be used as headings (for example, use only the surnames)
+%
+%\runningauthor{Surname 1, Surname 2, Surname 3, ...., Surname n}
+
+\twocolumn[
+
+\aistatstitle{Approximation Guarantees for Sherali Adams Relaxations}
+
+\aistatsauthor{ Author 1 \And Author 2 \And  Author 3 }
+
+\aistatsaddress{ Institution 1 \And  Institution 2 \And Institution 3 } ]
+
+\begin{abstract}
+ We study the extension result. 
+
+\end{abstract}
+
+\section{Introduction}
+
+MRFs have been widely studied and are very important. 
+
+We show that the hierarchy of Sherali adams relaxations are intimately related to the use of fourier decomposition approaches for graphical models. 
+
+We also provide theoretical understanding of approximation guarantees for these LP relaxations.
+
+
+
+\section{Preliminaries}
+
+\input{preliminaries}
+
+\subsection{Related Work}
+
+\input{related_work}
+
+\section{Fourier Analysis and LP relaxations}
+
+\input{fourier}
+
+\input{from01to11}
+
+\input{sheraliadams}
+
+\input{SheraliPower}
+
+\subsection{Minimal Set Systems}
+
+\input{minimalSetSystems}
+
+\section{Approximation preserving transformations}
+\input{tech_lemmas}
+\input{clamping}
+
+\input{Elimination}
+
+
+\input{unformatted}
+
+
+\subsubsection*{References}
+\begin{footnotesize} %footnotesize
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+\end{footnotesize} %footnotesize
+
+\clearpage
+\newpage
+\onecolumn
+\begin{appendix}
+\section{APPENDIX: SUPPLEMENTARY MATERIAL\\ Approximation Guarantees for Sherali Adams Relaxations}
+
+\input{supplementary}
+\end{appendix}
+
+%\input{modelpaste}
+
+
+\end{document}

@@ -1,0 +1,80 @@
+In this section we work with domain $\{-1,1\}^n$ instead of $\{0,1\}^n$. In the next section we show how to translate 
+
+\begin{definition}[Linearizations] Let $\mathcal{F} \subset \{ \{-1,1\} \rightarrow \mathbb{R}\}$ be a set of functions from $\{-1,1\}^n$ into the reals. Let $f : \{-1, 1\}^n \rightarrow \mathbb{R}$ and $V \subset \{-1, 1\}^n$.  For any $f \in \mathcal{F}$, the optimization problem:
+
+\begin{equation}
+\max_{x \in \{-1,1\}^n} f(x)
+\end{equation}
+
+Can be linearlized by introducing variables $y_v \in \mathbb{R}^D$ for some $D \in \mathbb{N}$ meant to represent the points in $\{-1,1\}^n$ and a linearlization $f^D \in \mathbb{R}^D$ of the objective function such that:
+
+\begin{equation}
+\langle f^D, y_v \rangle = f(v) \text{ } \forall v \in \{-1,1\}^n
+\end{equation}
+
+Given that we have linearized every $f \in \mathcal{F}$ and $\{-1,1\}^n$ we can consider the LP relaxation:
+
+\begin{equation}
+\mathcal{L}(f) = \max_{y \in P} \langle f^D, y \rangle
+\end{equation}
+
+where $P$ is any polytope such that $y_v \in P$ $\forall v \in \{-1,1\}^n$.
+
+We denote by the components of the set of linearizations as $(\{f^D | f \in \mathcal{F}\}, \{y_v | v\in \{-1,1\}^n\})$ as $\mathcal{L}(\mathcal{F})$. We use $\mathcal{L}(\mathcal{F})$ to denote the relaxation (the linearizations and polytope).
+\end{definition}
+
+
+\begin{definition}[$\Delta$ approximation] [Consider heavily revising this definition] For a function class $\mathcal{F} \subset \{ \{-1,1\}^n \rightarrow \mathbb{R} \}$ We say that an LP relaxation $\mathcal{L}(\mathcal{F})$ is a $\Delta$ approximation with respect to $\{s_f\}$ if for all $f(x) \in \mathcal{F}$, $\mathcal{L}(f) \leq s_f+\Delta$ where the family $\{s_f\}$ satisfies $\max_{x \in \{-1,1\}^n} f(x) \leq s_f$. When the family $\{s_f\}$ is omited we assume that $s_f = \max_{x \in \{-1,1\}^n} f(x)$ for all $f$.
+\end{definition}
+
+\begin{definition}[Size of an LP relaxation] The size of an LP relaxation equals the number of constraints it has.
+\end{definition}
+
+The space of functions $f : \{-1,1\}^n \rightarrow \mathbb{R}$ is a $\mathbb{R}^{2^n}$ hilbert space $L^2(\{-1,1\}^n)$ equipped with the inner product:
+
+\begin{definition}
+Let $f,g \in \{ \{-1,1\}^n \rightarrow \mathbb{R}\}$, define the dot product: 
+\begin{equation}
+\langle f,g\rangle_{\mathcal{L}^2(\{-1,1\}^n)} = \frac{1}{2^n} \sum_{x \in \{-1,1\}^n} f(x)g(x)
+\end{equation}
+\end{definition}
+
+
+\begin{definition}[Fourier decomposition]
+
+Let $x_S = \prod_{i \in S} x_i$. A function $f :\{ -1, 1\}^n \rightarrow \mathbb{R}$ has a unique decomposition of the form: 
+
+\begin{equation}
+f(x) = \sum_{S \subset [n]} \hat{f}(S)x_S
+\end{equation}
+
+Where $\{x_S\}_{S \subset [n]}$ is an orthonormal fourier basis of polynomials for $L^2(\{-1,1\}^n)$ under the dot product described above. By definition $\hat{f}(S) = \langle f, x_S \rangle_{L^2(\{-1,1\}^n)}$
+\end{definition}
+
+
+
+
+  
+ \begin{lemma}[Dot product and Fourier coefficients]
+ Let $f(x) = \sum_{S \subset[n]} \hat{f}(S) x_S$ and $g(x) = \sum_{S \subset [n] } \hat{g}(S)x_S$. Then:
+ 
+ \begin{equation}
+ \langle f(x) , g(x) \rangle_{L^2(\{-1,1\}^n)} = \sum_{S \subset [n] }\hat{f}(S)\hat{g}(S)
+ \end{equation}
+ 
+ \end{lemma}
+  
+  
+The following auxiliary theorem will be useful:
+
+
+\begin{theorem}\label{theorem_polytope_polynomials}[From LP relaxations to polynomials and back]  LP relaxation $\mathcal{L}(\mathcal{F})$ is a $\Delta$ approximation for $\mathcal{F}$ of size $R$ with respect to $\{s_f\}$ if and only if there exist nonnegative functions $q_1, \cdots, q_R : \{-1,1\}^n \rightarrow \mathbb{R}_{\geq 0}$ such that for all $f \in \mathcal{F}$ with $\max_{x \in \{-1,1\}^n} f(x) \leq s_f$, ($s_f$ is an upper bound for the optimum of $f$, dependent on $f$) the function $s_f + \Delta -f(x)$ is a nonnegative combination of $q_1, \cdots, q_R$:
+\begin{equation}
+s_f + \Delta - f(x) \in \{\lambda_0 + \sum_{i=1}^R \lambda_i q_i  | \lambda_0, \cdots, \lambda_R \geq 0 \}
+\end{equation}
+
+\end{theorem}
+
+The proof is in the appendix.
+
+

@@ -1,0 +1,141 @@
+
+
+\subsubsection{ Elimination algorithm }
+
+Assume the variable $x_n$ appears in monomials $\{x_{S_i}\}$ for $n \in S_i$ with nonzero coefficients in $f$.
+
+Define $\tilde{f}:\{-1,1\}^{n-1} \rightarrow \mathbb{R}$ the function resulting from running the elimination algorithm on $f$ and removing variable $x_n$. In other words:
+
+\begin{equation*}
+\tilde{f}(x_1, \cdots, x_{n-1}) = \max_{x_n \in \{-1,1\}} f(x_1, \cdots, x_{n-1}, x_n)
+\end{equation*}
+%Let $f(x) = \sum_{S \subset [n]} \hat{f}(S)x_S$.
+For more details regarding how to derive the Fourier expansion of $\tilde{f}$ from the expansion of $f$ consult the appendix. 
+
+We can split $f$ into those monomials that involve $n$ and those that do not.
+
+\begin{equation*}
+f(x) = \underbrace{\left(\sum_{S \subset [n] | S \not\in \{S_i\}} \hat{f}(S)x_S\right)}_{\bar{f}_n} + \underbrace{\left( \sum_{S \in \{S_i\}} \hat{f}(S)x_S\right)}_{f_n}
+\end{equation*}
+
+Let $S(n) = \left(\cup_i S_i\right) \backslash \{n\}$ (the neighbors of $x_n$) where $S(n) = \{i_1, \cdots, i_{|S(n)|}\}$ then:
+\begin{equation}
+\tilde{f} = \bar{f}_n + \tilde{f}_n
+\end{equation}
+
+Where abusing notation $\tilde{f}_n(x) = \tilde{f}_n(x_{i_1}, \cdots, x_{i_{|S(n)|}})$ and $f_n(x) = f_n(x_{i_1}, \cdots, x_{i_{|S(n)|}}, x_n)$. And $\tilde{f}_n(x_{i_1}, \cdots, x_{i_{|S(n)|}}) = f_n(x_{i_1}, \cdots, x_{i_{|S(n)|}}, 1)$ if $f_n(x_{i_1}, \cdots, x_{i_{|S(n)|}}, 1)  > f_n(x_{i_1}, \cdots, x_{i_{|S(n)|}}, -1)$ and  $\tilde{f}_n(x_{i_1}, \cdots, x_{i_{|S(n)|}}) = f_n(x_{i_1}, \cdots, x_{i_{|S(n)|}}, -1)$ otherwise.
+
+After performing one round of elimination of a variable, the approximation error of the Sherali Adams relaxation can only get worse.
+
+\begin{lemma}\label{elimination_degrades}[Elimination degrades the relaxation error]
+If $\tilde{f}$ has approximation error $\Delta$ for $\mathbb{L}_{\mathcal{S}}$ then $f$ has approximation error at most $\Delta$ as long as $S(n) \cup\{x_n\} \in \mathcal{S}$.
+\end{lemma}
+
+\begin{proof}
+The MAP score of $f$ and the MAP score of $\tilde{f}$ coincide. Let $s_f = \max_{x \in\{-1,1\}^n} f(x)$ and $s_{\tilde{f}} = \max_{x \in \{-1,1\}^{n-1}} \tilde{f}(x)$. Then $s_f = s_{\tilde{f}}$. 
+
+$\tilde{f}$ has approximation error $\Delta$ iff $\Delta + s_f - \tilde{f}$ can be written as a sum of nonnegative $\mathcal{S}$-juntas. 
+
+In other words there exist $\lambda_0, \cdots, \lambda_R \geq 0$ and $q_1, \cdots, q_R $ nonnegative $\mathcal{S}-$juntas such that:
+
+\begin{equation}
+\Delta + s_f  -\tilde{f} = \lambda_0 + \sum_{i=1}^R \lambda_i q_i
+\end{equation}
+
+The function $\tilde{f}_n - f_n$ is a nonnegative $\mathcal{S}-$junta by definition since $S(n) \cup \{x_n \} \in \mathcal{S} $ and because $\tilde{f}_n - f_n$ is always $\geq 0$. 
+
+Summing $\tilde{f}_n - f_n$ to both sides of the equation above yields:
+
+\begin{equation}
+\Delta + s_f  -f = \lambda_0 + \sum_{i=1}^R \lambda_i q_i + \left( \tilde{f}_n - f_n\right)
+\end{equation}
+
+Thus showing that $\Delta + s_f - f $ can be written as a sum of nonnegative $\mathcal{S}-$juntas. This in turn implies that the approximation error of $\mathbb{L}_\mathcal{S}$ on $f$ is at most $\Delta$.
+\end{proof}
+
+As a direct consequence of this lemma, if we can perform elimination and then bound the approximation error of the resulting model, we can obtain a bound for the original version. This yields a very simple proof of the following classical result cite[XXXXXXX]:
+
+\begin{theorem}\label{thm:wainjor}[Wainwright and Jordan]
+Any graph of treewidth $k-1$ is tight for $\mathbb{L}_k$
+\end{theorem}
+
+\begin{proof}
+Recall that for a graph $G$ the following two statments are equivalent:
+\begin{itemize}
+\item $G$ has treewidth at most $k-1$.
+\item $G$ has a triangulation (chordal envelope) with maximum clique size of at most $k$.
+\end{itemize}
+
+In other words, there is an order of the elimination algorithm for which at all times, if $v$ is beging eliminated $v$ has at most $k-1$ neighbors.
+
+Applying Lemma \ref{elimination_degrades} to these successive reduced models, the approximation error must be increasing. 
+
+Since at the last step elimination for a treewidth $k-1$ graph is able to end up with a graph of size at most $k$, $\mathbb{L}_k$ is tight for the model resulting at this last step. Because the approximation error deteriorates and it equals zero at the end of this process it must have been zero all along. 
+
+\end{proof}
+
+We present another proof of Theorem \ref{thm:wainjor} based on the juntas technology in the appendix.
+
+In fact for $k=2,3$ it is possible to prove that elimination preserves the approximation error all along. 
+
+\begin{theorem}[Elimination for $\mathbb{L}_2, \mathbb{L}_3$ preserves approximation] If $f$ has approximation error $\Delta$ for $\mathbb{L}_{\mathcal{S}}$ then $\tilde{f}$ has approximation error at most $\Delta$ if $\mathcal{S} = \mathbb{B}_k$. 
+\end{theorem}
+
+We conjecture that for the case of $k \geq 4$ this is not true. 
+
+
+
+
+
+
+
+\begin{comment}
+
+We conjecture the following to be true. That elimination preserves exactly the approximation error:
+
+\begin{lemma}[Conjecture][Elimination preserves the approximation error]
+If $f$ has an approximation error of at most $\Delta$ for $\mathbb{L}_k$ then $\tilde{f}$ has an approximation error of at most $\Delta$ for $\mathbb{L}_k$ provided that $|S(n)\cup \{x_n\} | \leq k$.  
+\end{lemma}
+
+
+\begin{proof}[Incomplete]
+The MAP score of $f$ and the MAP score of $\tilde{f}$ coincide. Let $s_f = \max_{x \in\{-1,1\}^n} f(x)$ and $s_{\tilde{f}} = \max_{x \in \{-1,1\}^{n-1}} \tilde{f}(x)$. Then $s_f = s_{\tilde{f}}$
+
+$f$ has an approximation error for $\mathbb{L}_k$ of at most $\Delta$ iff $\Delta + s_f - f$ can be written as a sum of nonnegative $k-$juntas:
+
+\begin{equation}
+\Delta + s_f  -f = \lambda_0 + \sum_{i=1}^R \lambda_i q_i
+\end{equation}
+
+Where $\lambda_0, \cdots, \lambda_R \geq 0$ and $q_i$ are all nonnegative $k-$juntas.
+
+Let $q_{j_1}, \cdots, q_{j_T}$ the $k-$juntas that depend on $x_n$. 
+
+First we show that if $q_{j_u}$ contains a variable not in $S(n)$ and different from $n$, we can split it into two $k-$juntas.
+
+Let $Q_{j_u}$ be the set of variables on which $q_{j_u}$ depends.
+
+Denote $x[Q_{j_u}]$ the vector of variables indexed by $Q_{j_u}$.
+
+\begin{equation}
+q_{j_u}(x[Q_{j_u}] )= \underbrace{ \min_{e \in \{-1,1\}} q_{j_u}(x[Q_{j_u}\backslash x_n], x_n=e) }_{\geq 0} + \underbrace{\left( q_{j_u}(x[Q_{j_u}]) -  \min_{e \in \{-1,1\}} q_{j_u}(x[Q_{j_u}\backslash x_n], x_n=e)\right)}_{\geq 0}
+\end{equation}
+
+TODO: Think about this proof and complete it. Or refute it. Note, this is related to the extension result, so it might not be true.
+
+\end{proof}
+
+By the smoothing results, this lemma is true for $k=2,3$. 
+
+\end{comment}
+
+
+
+
+
+
+
+
+
+
+

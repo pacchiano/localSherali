@@ -1,0 +1,23 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Preliminaries}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Related Work}{section.2}% 3
+\BOOKMARK [1][-]{section.3}{Fourier Analysis and LP relaxations}{}% 4
+\BOOKMARK [2][-]{subsubsection.3.0.1}{ From \1730,1\175 to \173-1,1\175 }{section.3}% 5
+\BOOKMARK [3][-]{subsubsection.3.0.2}{Sherali Adams as a functional Hierarchy}{subsubsection.3.0.1}% 6
+\BOOKMARK [3][-]{subsubsection.3.0.3}{ S-Sherali Adams is the most powerful S-local LP relaxation }{subsubsection.3.0.1}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Minimal Set Systems}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Approximation preserving transformations}{}% 9
+\BOOKMARK [2][-]{subsubsection.4.0.1}{Technical Lemmas}{section.4}% 10
+\BOOKMARK [3][-]{subsubsection.4.0.2}{Clamping}{subsubsection.4.0.1}% 11
+\BOOKMARK [3][-]{subsubsection.4.0.3}{ Elimination algorithm }{subsubsection.4.0.1}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Minors}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Flippings}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{Balanced models}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.4}{Uprooting}{section.4}% 16
+\BOOKMARK [3][-]{subsubsection.4.4.1}{ Relationship with the existing Uprooting paper }{subsection.4.4}% 17
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Finding the k-junta core of a model }{subsection.4.4}% 18
+\BOOKMARK [3][-]{subsubsection.4.4.3}{ Model Pasting with approximation errors }{subsection.4.4}% 19
+\BOOKMARK [1][-]{appendix.A}{APPENDIX: SUPPLEMENTARY MATERIAL Approximation Guarantees for Sherali Adams Relaxations}{}% 20
+\BOOKMARK [1][-]{appendix.B}{Technical Lemmas}{}% 21
+\BOOKMARK [2][-]{subsection.B.1}{Wainwright Jordan}{appendix.B}% 22
+\BOOKMARK [3][-]{subsubsection.B.1.1}{MAP Elimination algorithm in the fourier domain}{subsection.B.1}% 23

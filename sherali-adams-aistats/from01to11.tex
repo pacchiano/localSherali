@@ -1,0 +1,13 @@
+\subsubsection{ From $\{0,1\}$ to $\{-1,1\}$ }
+
+Any MAP problem on binary variables $\{0,1\}$ can be turned into a maximization problem over $\{-1,1\}$ for an objective function in $L(\{-1,1\}^n)$.
+
+Let $w$ be a weight vector indexed by subsets $S \subset [n]$ and binary $\{0,1\}$ variables $z_1, \cdots, z_n$ with coordinates indexed by pairs $(S,y_S)$ encoding the weight corresponding to the set of variables $S$ if $z_S$ agrees with configuration $y_S$. The weight vector $w \in \mathbb{R}^{3n}$. The objective function to maximize over possible assignments $(z_1, \cdots, z_n) \in \{0,1\}^n$ can be written as the following polynomial:
+
+\begin{align*}
+f(z) &= \sum_{S,y_S} w(S,y_S)*1(y_S = z_S)\\
+    % &=  \sum_{S,x_S} w(S,x_S)* \prod_{i \in S} (1-(z_i-x_i)^2) \\
+    &= \sum_{S,y_S} w(S,y_S)* \prod_{i \in S} (1- z_i -y_i + 2y_iz_i) \\
+\end{align*}
+
+Let $x_i = 2z_i - 1$ and define $\tilde{f}(x) = f\left(\frac{x_1+1}{2}, \cdots, \frac{x_n+1}{2}\right)$. The function $\tilde{f}$ is a polynomial over $\{-1,1\}^n$. Any maximizing configuration for $\tilde{f}$ can be turned into a maximizing configuration of $f$. The maximum degree of $\tilde{f}$ equals the maximum degree of $f$.

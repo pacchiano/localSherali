@@ -1,0 +1,38 @@
+
+\subsubsection{ $\mathcal{S}-$Sherali Adams is the most powerful $\mathcal{S}$-local LP relaxation }
+
+
+\begin{theorem}
+Let $\mathcal{L}(\mathcal{F})$ be $\Delta$ approximation for the function class $\mathcal{F}$. By Theorem \ref{theorem_polytope_polynomials}, there exist nonnegative functions (which can be thought of as polynomials) $q_1, \cdots, q_R$ such that $s_f + \Delta - f(x)$ is a nonnegative combination of $\{q_i\}$. If all the $\{q_i\}$ follow $\mathcal{V}(g_i) \in \mathcal{S}$ then $\mathbb{L}_\mathcal{S}$ is also a $\Delta$ approximation for $\mathcal{F}$.
+In other words, among all relaxations all of whose constraints are $\mathcal{S}-$juntas, the $k-$Sherali Adams relaxation is the one with the smallest approximation error. 
+\end{theorem}
+
+\begin{proof}
+Let $f \in \mathcal{F}$. By assumption there exist $\lambda_0(f), \cdots, \lambda_R(f) \geq 0$ such that:
+
+\begin{equation}
+s_f + \Delta - f(x) = \lambda_0 + \sum_{i=1}^R \lambda_i q_i
+\end{equation}
+
+Let $\tilde{\mathbb{E}}$ be any $\mathcal{S}$-local pseudo expectation functional. 
+
+\begin{align}
+\tilde{\mathbb{E}}[s_f + \Delta - f(x)] &= s_f + \Delta - \tilde{\mathbb{E}}[f(x)] \\
+&= \lambda_0 + \sum_{i=1}^R\lambda_i(f) \tilde{\mathbb{E}}[q_i] \\
+&\geq 0
+\end{align}
+
+The last inequality follows because $q_i$ are assumed to be nonnegative with $\mathcal{V}(q_i)\in \mathcal{S}$.
+
+This implies that for all $f \in \mathcal{F}$:
+
+\begin{equation}
+s_f + \Delta  \geq \tilde{\mathbb{E}}[f(x)]
+\end{equation}
+
+Since this is true for all $\mathcal{S}$-local expectation functionals, it is also true for the one achieving the maximum. This implies the desired result.
+
+\end{proof}
+
+
+We have just proved that among all relaxations having local constraints with variables belonging to $\mathcal{S}$, the $\mathcal{S}$-Sherali Adams relaxation is the one that achieves the smallest approximation error.

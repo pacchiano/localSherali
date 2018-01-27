@@ -1,0 +1,294 @@
+\subsection{Minors}
+
+Let $\mathcal{G}_k(\Delta)$ be the set of graphs that achieve approximation error at most $\Delta$ under $\mathbb{L}_k$ for all node and edge potentials. 
+
+\begin{theorem}
+$\mathcal{G}_k(\Delta)$ is closed under taking minors (resp. signed minors). 
+\end{theorem}
+
+\begin{proof}
+The same proof of minor closure as for the case of $\Delta = 0$ works here.
+\end{proof}
+
+\subsection{Flippings}
+
+\begin{lemma}
+Flipping reparametrization preserve the approximation error for $\mathbb{L}_k$.
+\end{lemma}
+
+\begin{proof}
+$f :\{-1,1\}^n \rightarrow \mathbb{R}$ has approximation error at most $\Delta$ if and only if there are $\lambda_0, \cdots, \lambda_R \geq 0$ and $q_1, \cdots, q_R$ nonnegative $k-$juntas such that:
+
+\begin{equation}
+\Delta + s_f - f = \lambda_0 + \sum_{i=1}^R \lambda_i g_i
+\end{equation}
+
+Where $s_f = \max_{x \in \{-1,1\}^n} f(x)$. Let $\hat{f}(x)$ be an objective function for which some variables are flipped with respect to $f$. Notice $s_{\hat{f}} = s_f$. By performing this flipping operation on the LHS and RHS of the equation above we obtain $\Delta + s_f - \hat{f}$ and flipped nonnegative $k-$juntas respectively, thus verifying that the approximation error of $\hat{f}$ is at most $\Delta$ as well. In fact this also shows that the approximation error is exactly the same for $f$ and for $\hat{f}$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\subsection{Balanced models}
+
+In [Adrian's paper on LOC tightness] it is shown that balanced models are tight for LOC where the objective function is over $\{0,1\}^n$:
+
+\begin{equation}
+f(z)  = \sum_{i=1}^n \theta_i z_i + \sum_{(i,j) \in E} w_{i,j} z_iz_j 
+\end{equation}
+
+And the optimization problem equals:
+
+\begin{equation}
+\max_{z \in \{0,1\}^n} f(z)
+\end{equation}
+
+Reparametrizing $f$ so it is over variables in $x \in \{-1,1\}^n$ by the formula $x_i = 2z_i-1$:
+
+
+\begin{equation}
+f(x) = \sum_{i=1}^n \theta_i\left( \frac{x_i + 1}{2} \right) + \sum_{(i,j) \in E} w_{i,j} \left( \frac{x_i+1}{2} \cdot \frac{x_j + 1}{2} \right)
+\end{equation}
+
+The signs of the coefficients of $z_iz_j$ map exactly to the signs of coefficients for the $x_ix_j$ terms. In other words (abusing terminology) the model using the ensemble $\{z_i\}$ is almost balanced if and only if the omdel using the ensemble $\{x_i\}$ is. We can then provide a somewhat constructive proof of the following statement:
+
+\begin{lemma}
+All balanced models $f(x) = \sum \theta_i x_i + \sum_{(i,j)} w_{i,j} x_ix_j$ for $x \in \{-1,1\}^n$ are tight for LOC.
+\end{lemma}
+
+
+\begin{proof}[INCOMPLETE SO FAR - THE AISTATS IDEAS might work]
+By flipping variables and Harari's theorem we can reduceit to prove tightness for attractive models. Wlog we can assume $f$ has no constant (bias) term.
+
+If $s_f = \max_{x \in \{-1,1\}^n} f(x)$, tightness of $f$ for LOC holds iff $s_f - f$ can be written as a sum of nonnegative $2-$juntas. 
+
+Let these juntas be $q_{i,j}$. We can aggregate all juntas involving exactly variables $i$ and $j$ into $q_{i,j}$. Under this condition, the only junta that can have a term of the form $x_ix_j$ is $q_{i,j}$. Therefore the coefficient of $x_ix_j$ in $q_{i,j}$ must be $-w_{i,j}$. 
+
+Write $q_{i,j}(x_i,x_j) = -\theta_i' x_i - \theta_j'x_j - w_{i,j} + c_{i,j}$ for some $\theta_i'$, $\theta_j'$. Since $q_{i,j}$ is nonnegative for all $x_i,x_j \in\{-1,1\}$ pairs, there is an assignment of $x_i, x_j$ for which $-\theta_i^{(i,j)} x_i - \theta_j^{(i,j)} x_j - w_{i,j} \leq 0$ implying that $c_{i,j} \geq 0$.
+
+It must be the case that $\sum_{j} \theta_z^{(i,j)} = \theta_z$ for all $z$.
+
+Notice that $s_f \geq 0$ because $w_{i,j} \geq 0$, either the all ones vector or the all $-1$ vector achieves a nonnegative score. 
+
+Let $x^*$ be the optimal assignment for $f$. 
+
+
+We show that we can distribute the score $s_f$ locally among the edges to ensure that all the juntas are non negative.
+\end{proof}
+
+
+
+
+\subsection{Uprooting}
+
+The goal is to show an operator version of uprootings. Let $f(x) : \{-1,1\}^n \rightarrow \mathbb{R}$ be a polynomial made of monomials of degree $d$ and degree $d-1$ only. Let's augment $f(x)$ by adding an extra variable $x_{n+1}$ and write $f^{up}(x) : \{-1,1\}^{n+1} \rightarrow \mathbb{R}$ be the polynomial defined by multiplying all degree $d-1$ monomials of $f$ by $x_{n+1}$ and letting the degree $d$ monomials intact. All monomials of $f^{up}$ have degree $d$. Let $k \geq d$.
+
+\begin{lemma}
+\begin{equation}
+\mathbb{L}_k(f) = \max_{\tilde{E}_k | \tilde{E}_k[x_{n+1}] = 1 } \tilde{E}_k[f^{up}]
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The two directions of the proof are easy to argue.
+\end{proof}
+
+\begin{lemma}
+When $d =2$ and $k = 3$:
+\begin{equation}
+\mathbb{L}_k(f) = \max_{\tilde{E}_k | \tilde{E}_k[x_{n+1}] = -1 } \tilde{E}_k[f^{up}]
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $\mathbb{L}_k(f) - f$ as a sum of nonnegative $k-$juntas. Collect all juntas that use exactly the same $k$ variables. 
+
+The junta corresponding to $(i_1,i_2,i_3)$ cannot have a nonzero coefficient on the monomial $x_{i_1}x_{i_2}x_{i_3}$ since by assumption $\mathbb{L}_k(f) - f$ doesn't contain that monomial. In other words, all juntas have only monomials of degree $1$ and $2$. Multiply the degree $1$ monomials by $x_{n+1}$. 
+
+Notice that the range of the juntas hasn't changed after adding $x_{n+1}$.  
+
+Indeed any value in the range pre multiplying by $x_{n+1}$ can be achieved by setting $x_{n+1} = 1$, any value achieved by setting $x_{n+1} = 1$ can be trivially achieved in the range before multiplying by $x_{n+1}$. Any value in the range obtained with $x_{n+1} = -1$ can be achieved in the range before multiplying by $x_{n+1}$ by flipping the variables that are multiplied by $x_{n+1}$.
+
+In other words, after multiplying by $x_{n+1}$ the juntas are still nonnegative. 
+
+We have just written $\mathbb{L}_k(f) - f^{up}$ as a sum of nonnegative juntas (some of them possibly using $k+1$ variables). Since all the monomials in $f^{up}$ have an even degree: 
+
+$f^{up}(x) = f^{up}(\bar{x})$ where $\bar{x}$ denotes the flipped version of $x \in \{ -1,1\}^{n+1}$.
+
+This implies that $\mathbb{L}_k(f) -f^{up}(x)|_{x_{n+1} = 1}$ can achieve the same values as $\mathbb{L}_k(f) -f^{up}(x)|_{x_{n+1} = -1}$. 
+
+Since $\mathbb{L}_k(f) -f^{up}(x)|_{x_{n+1} = 1} = \mathbb{L}_k(f) -f(x)$, this immediately yields a characterization of $\mathbb{L}_k(f) -f^{up}(x)|_{x_{n+1} = -1}$ as a sum of nonnegative $k-$juntas. 
+
+This concludes the result. 
+
+\end{proof}
+
+
+\begin{lemma}\label{even_functions}
+If $g:\{-1,1\}^m \rightarrow \mathbb{R}$ is a function such that $g(x) = g(\bar{x})$, where $\bar{x}$ is the flipped version of $x$, then $range(g|_{x_m = 1}) = range(g |_{x_m =-1})$.
+\end{lemma}
+
+\begin{proof}
+A simple calculation shows this to be the case.
+\end{proof}
+
+
+\begin{definition}[Generalized uprooting]
+Let $f:\{-1,1\}^n \rightarrow \mathbb{R}$. Define the generalized uprooting of $f$ to be  a function $\hat{f} : \{-1,1\}^{n+1} \rightarrow \mathbb{R}$ built from $f$ by multiplying all the odd degree monomials of $f$ by $x_{n+1}$.
+\end{definition}
+
+\begin{definition}[Generalized rerooting]
+Let $f:\{-1,1\}^{n+1} \rightarrow \mathbb{R}$. Define the generalized rerooting of $f$ under variable $v$ to be $\underbar{f}:\{-1,1\}^n\rightarrow \mathbb{R}$ built from $f$ by setting $x_{v}$ to $1$. 
+\end{definition}
+
+\begin{lemma}
+Let $s_f = \max_{x \in \{-1,1\}^n} f(x)$. Let $f$ be a polynomial of degree $d \leq k$. If $L_k$ be a $\Delta$ approximation for $\{f\}$. Then its generalized uprooting $\hat{f}$ satisfies that $\Delta + s_f - \hat{f}$ can be written as a sum of nonnegative $k+1$-juntas. Furthermore $\mathbb{L}_{k+1}$ is a $\Delta$ approximation for any rerooting of $\hat{f}$.
+\end{lemma}
+
+\begin{proof}
+By assumption $\Delta + s_f - f = \sum_{i}^R q_i$ where $q_i$ are nonnegative $k-$juntas. Here we have coalesced the $\lambda_i$ into the $q_i$.
+
+Multiply all odd degree monomials of $f$ by $x_{n+1}$. Do the same for the odd degree monomials of each junta $q_i$. The two sides of the quality should coincide after this procedure. All the resulting functions, $\hat{f}$ (since adding $x_{n+1}$ is exactly the uprooting operation for $f$) and $\{\hat{q}_i\}$ (uprootings of $q_i$ with variable $x_{n+1}$) are even. Furthermore, $\hat{q}_i$ are nonnegative. The later is true since by lemma \ref{even_functions}, $range(\hat{q}_i|_{x_{n+1} = -1}) = range(\hat{q}_i|_{x_{n+1} = 1}) = range(q_i) \geq 0$. We obtain the following representation:
+
+\begin{equation}
+\Delta + s_f - \hat{f} = \sum_{i=1}^R \hat{q}_i
+\end{equation}
+
+In othder words $\Delta + s_f - \hat{f}$ can be written as a sum of nonnegative $k+1$-juntas.
+
+We now show the rerooting statement.
+
+By Lemma \ref{even_functions}, setting any of the variables $x_1, \cdots, x_{n+1}$ to either $1$ or $-1$ leaves the range of the function $\Delta + s_f - \hat{f}$ unchanged. 
+
+Therefore for any $v \in \{1, \cdots, n+1\}$, the generalized rerooting of $\hat{f}$ and the resulting $\Delta + s_f - {\hat{\underbar{f}}}$ can be written as:   
+
+\begin{equation}
+\Delta + s_f - \hat{\underbar{f}} = \sum_{i=1}^R \hat{\underbar{q}}_i
+\end{equation}
+
+Where $\hat{\underbar{q}}_i$ equals $\hat{q}_i( \cdot, x_v= 1)$ for all $i$. Notice that $x_v$ might not affect $\hat{q}_i$ in which case, no variable in $\hat{q}_i$ will ''cancel'' in the rerooting.
+
+Clearly $\hat{\underbar{q}}_i \geq 0$ and depends on at most $k+1$ variables for all $i$.
+
+Let $s_{\hat{\underbar{f}}} = \max_{x  \in \{-1,1\}^{n} } \hat{\underbar{f}}(x)$. 
+
+Notice that $s_{\hat{\underbar{f}}} = s_f$ because both quantities equal $\max_{x \in\{-1,1\}^{n+1}} \hat{f}(x)$- the max score of the uprooted model. 
+
+Since $s_{\hat{\underbar{f}}} = s_f$ it follows that $\Delta + s_{\hat{\underbar{f}}} - \hat{\underbar{f}}$ is a sum of $k+1$-nonnegative juntas and therefore $\mathbb{L}_{k+1}$ has an approximation error of at most $\Delta$ over the rerooted model $\hat{\underbar{f}}$.
+
+\end{proof}
+
+
+
+\subsubsection{ Relationship with the existing Uprooting paper }
+
+If we identify in the paper $1$ with $1$ and $-1$ with the assignment value of $0$, then we can identify even potentials with the polynomials:
+
+\begin{align}
+\frac{ \pi_{i \in U} x_i - 1  }{2} & \text{ if }  |U| \text{ is even}\\
+\frac{ 1- \pi_{i\in U} x_i}{2} & \text{ if } |U| \text{ is odd}
+\end{align}
+
+Clearly these polynomials for a basis of the space of polynomials of degree at most $k$ as long as we define the polynomial corresponding to $U = \emptyset$ to be a constant equal to $1$. 
+
+This is the equivalent of Proposition 12:
+
+Following the above definition of uprootings and of even potentials, it immediately follows that any even -$k$-potential when $k$ is even remains unmodified by the uprooting operation. 
+
+Theorem $17$ is basically Lemma 36. 
+
+In order to build the counterexample that is shown for refuting the universal uprooting:
+
+Let a distribution be defined over $x_{i_1}, \cdots, x_{i_k}$ by declaring that all configurations of the form $\{( - 1, 1, \cdots, 1), (  1, -1, \cdots, 1), \cdots, ( 1, 1, \cdots, -1)\}$ be equally likely with probability $\frac{1}{k}$. 
+
+Let $U \subseteq \{ i_1, \cdots, i_k\} $:
+
+\begin{equation}
+P(x_U) = \begin{cases}
+		0 & \text{if } \exists\text{ } a\neq b \text{ s.t. } x_{i_a} = x_{i_b} = -1\\
+        \frac{1}{k} & \text{if } x_{i_a} = -1 \text{ for a single } a\\
+        \frac{k-|U|}{k} & \text{ if } x_{i_a} = 1 \forall a
+		\end{cases}
+\end{equation}
+
+
+The resulting pseudoexpectation therefore satisfies:
+
+\begin{equation}
+\tilde{\mathbb{E}}[x_U] = \frac{k-2|U|}{k}
+\end{equation}
+
+
+In particular $\tilde{\mathbb{E}}[x_U] = -1$ whenever $|U| = k$. This tells us that for this objective $f$ (sums of the indicators of even functions) this particular pseudoexpectation gives us a value of $0$ for the case when $k$ is even. 
+
+The same analysis that is done in the paper carries over. 
+
+The pseudoexpectation $\tilde{\mathbb{E}}$ can be written as a degree $k$ polynomial over $\{-1,1\}^{k+1}$ with coefficients for $x_U$ equal to $\tilde{\mathbb{E}}[x_U]$.
+
+
+
+\subsubsection{Finding the $k-$junta core of a model }
+
+We present an algorithm such that given a real value $B$ and $f :\{ -1,1\}^n \rightarrow \mathbb{R}$ a polynomial of degree $d$, finds a submodel $f':\{-1, 1\}^n \rightarrow \mathbb{R}$ such that  $\mathbb{L}_k(f') \leq B$, and the $l_1$ distance between $f$ and $f'$ is minimal. 
+
+Define the $l_1$ distance between two polynomials over $\{-1,1\}^n$ as the sum of the absolute value of their coefficients' differences.
+
+In order to find $f'$ we propose to solve an LP based on the idea of making sure that $B - f'$ can be written as a sum of nonnegative $k-$juntas while at the same time ensuring that $|f - f'|$ be small. 
+
+
+Assume that $B - f'$ was a sum of nonnegative $k-$juntas. For every $S \subset [n]$ with $|S| =k$ and $S = \{i_1, \cdots, i_k\}$ let $g_S(x_{i_1}, \cdots, x_{i_k})$ be the corresponding $k-$junta for subset $S$ in this decomposition. Let $W \subset [n]$, denote $g_S(W)$ the coefficient of $x_W$ in the fourier expansion of $g_S$. Obviously $g_S(W) = 0$ if $W \not\subset S$.
+
+If $\hat{f'}(U)$ is the fourier coefficient for $U \subset [n]$ the following relationship must hold $\forall U \subset [n]$ and $U \neq\emptyset $:
+
+\begin{equation}
+\hat{f'}(U) = -\sum_{S \subset [n] | |S| = k} g_S(U)   
+\end{equation}
+
+And
+
+\begin{equation}
+B - \hat{f'}(\emptyset) = \sum_{S \subset [n] | |S| = k} g_S(\emptyset) 
+\end{equation}
+
+A junta $g_S(x_{i_1}, \cdots, x_{i_k})$ is nonnegative if for all possible assignments of $x_{i_1}, \cdots, x_{i_k} \in\{-1,1\}^k$ the function returns a nonnegative value. 
+
+The following LP solves for $f'$ over variables $\{z_U\}_{U \subset [n] | |U| \leq d}$, $\{ g_S(U) \}_{S \subset [n] | |S| =k, U \subset S}$:
+
+\begin{align*}
+\min \sum_{U \subset [n] | |U| \leq d} z_U \\
+z_U \geq \hat{f}(U) + \sum_{S \subset [n] | |S| = k} g_S(U) & \text{ } \forall U \neq \emptyset, |U| \leq d\\
+z_U \geq -\hat{f}(U) - \sum_{S \subset [n] | |S| = k} g_S(U) & \text{ } \forall U \neq \emptyset, |U| \leq d \\
+z_\emptyset \geq -B + \hat{f}(\emptyset) + \sum_{S \subset [n] | |S| = k} g_S(\emptyset) & \text{ } \\
+z_\emptyset \geq B-\hat{f}(\emptyset) - \sum_{S \subset [n] | |S| = k} g_S(\emptyset) & \text{ } \forall U \neq \emptyset \\
+\sum_{U \subset S } g_S(U) x_U \geq 0 \text{ } \forall (x_{i_1}, \cdots, x_{i_k} ) \in \{-1,1\}^k, &\forall S \subset [n], |S| = k
+\end{align*}
+
+If this program achieves an objective value $R$, $|f' - f|_1 = R$ and $\mathbb{L}_k(f') \leq B$. 
+
+
+
+
+
+
+
+IDEA: Maybe we can impose LP constraints over the remaining coefficients that ensure tightness of the $f'$ model. Maybe using some minors characterization? 
+
+
+IDEA: what about a minors characterization of higher order potentials programs by using the idea of Wainwright and Jordan or linearizing the objective. 
+
+
+
+
+
+
+\subsubsection{ Model Pasting with approximation errors }
+
+Here we revert to the notation pre Fourier analysis. We should be able to obtain a similar result with the new Fourier Technology, but for lack of time and in the spirit of completeness I append this version of the result. 
+
+\input{modelpaste}

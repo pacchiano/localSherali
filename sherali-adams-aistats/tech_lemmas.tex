@@ -1,0 +1,24 @@
+
+\subsubsection{Technical Lemmas}
+In this section we develop some lemmas that will aide us.
+\begin{lemma}\label{equivalence_lk_juntas}
+Let $f$ be a degree $\leq k$ polynomial over $\{-1,1\}^n$ then $\tilde{\mathbb{E}}_k[f] \leq 0$ for all $\tilde{\mathbb{E}}_k$ iff  $\mathbb{L}_k(f) \leq 0$ iff $-f$ is a sum of nonnegative $k-$juntas.
+\end{lemma}
+
+
+\begin{lemma}
+
+Let $f : \{-1,1\}^n \rightarrow \mathbb{R}$ be a degree $\leq k$ polynomial over $\{-1,1\}^n$ and $f'(x_1, \cdots, x_{n-1}) = f(x_1, \cdots, x_{n-1}, 1)$. Then:
+
+\begin{equation}
+\mathbb{L}_k(f') \leq \mathbb{L}_k(f)
+\end{equation}
+
+The same result holds when $f'(x_1, \cdots, x_{n-1}) = f(x_1, \cdots, x_{n-1}, -1)$.
+\end{lemma}
+
+
+\begin{corollary}
+Let $f:\{-1,1\}^n\rightarrow \mathbb{R}$ and $g:\{-1,1\}^n \rightarrow \mathbb{R}$. $\tilde{\mathbb{E}}_k[f] \geq \tilde{\mathbb{E}}_k[g]$ for all $k-$ local pseudo distributions iff $f-g$ is the sum of nonnegative $k-$juntas.
+\end{corollary}
+

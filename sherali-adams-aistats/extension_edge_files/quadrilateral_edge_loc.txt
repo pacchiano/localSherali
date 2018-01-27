@@ -1,0 +1,18 @@
+#:: z0 z1 z0z1 z2z3 z3 z1z2 z2 z0z3 u
+0 ≤ z0 + u - z0z1 - z1
+0 ≤ z0z1 + z0 + z1 + u
+0 ≤ z2 + u - z1z2 - z1
+0 ≤ z1 + u - z1z2 - z2
+0 ≤ u
+0 ≤ z1z2 + u - z1 - z2
+0 ≤ z0z1 + u - z0 - z1
+0 ≤ z3 + u - z0z3 - z0
+0 ≤ z2 + u - z2z3 - z3
+0 ≤ z0 + u - z0z3 - z3
+0 ≤ z3 + u - z2z3 - z2
+0 ≤ z1z2 + z1 + z2 + u
+0 ≤ z2z3 + z2 + z3 + u
+0 ≤ z0z3 + z0 + z3 + u
+0 ≤ z1 + u - z0z1 - z0
+0 ≤ z2z3 + u - z2 - z3
+0 ≤ z0z3 + u - z0 - z3

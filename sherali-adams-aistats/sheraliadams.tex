@@ -1,0 +1,105 @@
+
+\subsubsection{Sherali Adams as a functional Hierarchy}
+
+For any nested set System $\mathcal{S}$, the Sherali Adams polytope $\mathbb{L}_{\mathcal{S}}$ can be identified with a set of linear functionals acting over $\{0,1\}^n$ polynomials of degree at most $\max\left\{ |S| \text{ s.t. } S \in \mathcal{S}^{top}\right\}$. Optimizing a weight vector $w$ over all $\{0, 1\}^n$ assignments of the underlying variables can be written as a polynomial objective $f$ over $\{0,1\}^n$. 
+
+An element $\mu \in \mathbb{L}_{\mathcal{S}}$ acts over $f$ linearly by mapping every monomial $x_S$ to $\mu(S, 1\cdots1 )$. Similarly the Sherali Adams hierarchy has a similar description when considering $\{-1,1\}^n \rightarrow \mathbb{R}$ objectives. The $k-$th level of the Sherali Adams hierarchy can be treated as a set of linear functionals:
+
+\begin{definition}[Consider removing]
+Given $f:\{-1,1\}^n\rightarrow \mathbb{R}$, let $\mathcal{V}(f) \subset [n]$ be $\mathcal{V}(f) = \cup_{S | \hat{f}(S) \neq 0} S $
+\end{definition}
+
+\begin{definition}[$\mathcal{S}-$sherali Adams functionals] Let $\mathcal{S}$ be a nested set system. We define a $\mathcal{S}-$local expectation functional $\tilde{\mathbb{E}}_\mathcal{S}$ to be a linear functional on $L^2(\{-1,1\}^n)$ such that:
+\begin{align*}
+\tilde{\mathbb{E}}_\mathcal{S}[x_S] &= \mathbb{E}_{x_S \sim \mu_S  } [x_S] & \forall S \in \mathcal{S} \\
+\tilde{\mathbb{E}}[x_S] 
+&= l_S &\text{for some $l_s$ } \in \mathbb{R} \text{ o.w.}
+\end{align*}
+For every $S$ there is a distribution over variables $x_S$ whose expectation over $x_S$ agrees with the pseudo expectation operator over the said variables as long as $S \in \mathcal{S}$.
+\end{definition}
+
+
+\begin{definition}[$k-$round Sherali Adams functionals] If $\mathcal{S} =\mathbb{B}_k$ we call any $\tilde{\mathbb{E}}_\mathcal{S}$ a $k-$local expectation functional.
+\end{definition}
+
+
+We denote by $\mathbb{L}_k$ the set of all $k-$local expectation functionals. This corresponds with the $k-$Sherali adams polytope as defined in Section [xxx]. 
+
+
+\begin{definition}
+An $r-$junta is a function $f: \{-1,1\}^n \rightarrow \mathbb{R}$ that depends solely on (at most) $r$ variables $|\mathcal{V}(f)| \leq k$.
+Given a nested set system $\mathcal{S}$ over $[n]$, a $\mathcal{S}-$junta is a function $f$ such that $\mathcal{V}(f) \in \mathcal{S}$. 
+\end{definition}
+
+The following Lemma follows directly from the definition.
+
+\begin{lemma}
+An $\mathcal{S}-$Sherali Adams functional follows:
+\begin{align*}
+\tilde{\mathbb{E}}_{\mathcal{S}}[1] &= 1 & \text{for the constant polynomial }1 \\
+\tilde{\mathbb{E}}_{\mathcal{S}}[P] &\geq 0  & \text{if }  \mathcal{V}(P) \in \mathcal{S}, P \geq 0 
+\end{align*}
+\end{lemma}
+
+
+
+\begin{lemma}[Consider removing]
+A $k-$round Sherali Adams functional follows:
+\begin{align*}
+\tilde{\mathbb{E}}_k[ 1 ] = 1  & \text{ for the constant polynomial } 1\\
+\tilde{\mathbb{E}}_k[P] \geq 0 & \text{ for every nonnegative $k-$junta } P \\
+\end{align*}
+\end{lemma}
+
+Since the space $L^2(\{-1,1\}^n)$ is self dual, all linear functionals over $L^2(\{-1,1\}^n)$ can be identified with points in $L^2(\{-1,1\}^n)$. In this way we can say $\mathbb{L}_k \subset L^2(\{-1,1\}^n)$. 
+
+The later means that every $\mathcal{S}-$Sherali Adams functional has a Fourier decomposition: 
+
+\begin{equation*}
+\tilde{\mathbb{E}}_k = \sum_{S \subset [n] } \tilde{\mathbb{E}}_k[x_S] x_S
+\end{equation*}
+
+This also provides us with a natural embedding of $\tilde{\mathbb{E}}_k$ into $\mathbb{R}^{2^n}$ by associating every dimension of this space with a subset $S \subset [n]$ and representing every $\tilde{\mathbb{E}}_k$ by its vector of fourier coefficients. 
+
+%We define the Sherali Adams polytope as the set of all these embeddings for all the $k-$round Sherali Adams functionals. It is easy to see this is a polytope [Think from the coefficients perspective and it is possible to give explicit linear constraints.] Notice that this polytope is unbounded, since its projections to dimensions corresponding to sets $S$ with $|S| > k$ are unbounded.
+
+%\begin{lemma}[Size of $k-$Sherali Adams] [Consider revising a bit]
+%The size of the $k-$ sherali adams relaxation is $\binom{n}{k}$
+%\end{lemma}
+
+%The following holds:
+
+\begin{theorem}
+Let $\mathcal{F}$ be a function class made of polynomials with maximum degree $k$. The $\mathcal{S}-$Sherali relaxation is a $\Delta$ approximation for the objective class $\mathcal{F}$ if and only if $\Delta + s_f - f$ is a sum of nonnegative $\mathcal{S}-$juntas for all $f \in \mathcal{F}$. 
+\end{theorem}
+
+The proof is in the appendix.
+
+%In what follows we will use this characterization to prove some transformations preserve approximation error ($\Delta$). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

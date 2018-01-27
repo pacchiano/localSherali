@@ -1,0 +1,25 @@
+Let $A, B, C$ be three disjoint variable sets and consider $L(A,B)$ and $L(B,C)$ be relaxations of $M(A,B)$ and $M(B,C)$ the marginal polytopes over the set of variables $A \cup B$ and $B \cup C$. 
+
+We use the notation $\mu^{(1)}$ to denote points in $L(A,B)$ and $\mu^{(2)}$ to denote points in $L(B,C)$. We can partition $\mu^{(1)}$ and $\mu^{(2)}$ in two sets of dimensions as $\mu^{(1)} = [\mu_B, \mu_{A,B}]$ were $\mu_B \in L(B) \subset M(B)$ and $\mu^{(2)} = [\mu_B, \mu_{B,C}]$ were $\mu_B \in L(B)$ as well, while $\mu_{A,B}$ and $\mu_{B,C}$ correspond to all dimensions where $S$ is either entangled between variables in $B$ and variables in $A$ (respectively $C$) or only contains variables in $A$ (respectively $C$).
+
+
+Notice that $M(A,B,C)$ and $L(A,B,C)$ live in a $3^{|A|+|B|+|C|}$ dimensional space. 
+
+Embed $M(A,B)$, $L(A,B)$, $M(B,C)$ and $L(B,C)$ in the natural way as infinite polyhedron in the space where $M(A,B,C)$ and $L(A,B,C)$ live by padding the dimensions that are not constrained by taking a product with copies of $\mathbb{R}$, consider $M(A,B) \cap M(B,C)$ and $L(A,B) \cap L(B,C)$. Observe that $ M(A,B,C) \subseteq M(A,B) \cap M(B,C) $ and $L(A,B,C) \subseteq L(A,B) \cap L(B,C)$.
+
+\begin{theorem}[Model pasting]
+Let $w \in \mathbb{R}^{3^{|A|+|B|+|C|}}$ such that all entries of $w$ corresponding to dimensions not present in $M(A,B) \cap M(B,C) \subset L(A,B) \cap L(B,C)$ equal zero such that $w = [w^*_{A,B}, w_B, w^*_{B,C}, 0]$. Where $w^*_{A,B} \in \Omega_{A,B}$, $w^*_{B,C} \in \Omega_{B,C}$ and $w_B \in \mathbb{R}^{3^|B|}$.  
+
+Assume that for any such $w$: 
+\begin{itemize}
+\item[a)] $\max_{\mu^{(1)} \in M(A,B) } \langle (w^*_{A,B}, w_B), \mu^{(1)} \rangle \leq \max_{\mu^{(1)} \in L(A,B)} \langle (w^*_{A,B}, w_B), \mu^{(1)}\rangle + c_{A,B}$ for some constant $c_{A,B} \geq0$.
+\item[b)] $\max_{\mu^{(2)} \in M(B,C) } \langle (w_B, w^*_{B,C}), \mu^{(2)} \rangle \leq \max_{\mu^{(2)} \in L(B,C)} \langle (w_B, w^*_{B,C}, w_B), \mu^{(2)}\rangle + c_{B,C}$ for some constant $c_{B,C} \geq 0$.
+\end{itemize}
+
+The following holds:
+\begin{equation}
+\max_{ \mu  \in M(A,B,C) } \langle w, \mu \rangle = \max_{ \mu^* \in L(A,B) \cap L(B,C)} \langle w, \mu^* \rangle + c_{A,B} + c_{B,C}
+\end{equation}
+\end{theorem}
+
+
